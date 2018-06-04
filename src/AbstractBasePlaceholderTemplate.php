@@ -54,6 +54,8 @@ abstract class AbstractBasePlaceholderTemplate implements TemplateInterface
     {
         try {
             return $this->_render($context);
+        } catch (InvalidArgumentException $e) {
+            throw $e;
         } catch (RootException $e) {
             throw $this->_createTemplateRenderException($this->__('Could not render placeholder template'), null, $e, $this, $context);
         }
