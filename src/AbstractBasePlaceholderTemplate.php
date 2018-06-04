@@ -8,6 +8,7 @@ use Exception as RootException;
 use Dhii\Data\Container\ContainerInterface as BaseContainerInterface;
 use Dhii\Data\Container\ContainerGetCapableTrait;
 use Dhii\Util\Normalization\NormalizeStringCapableTrait;
+use InvalidArgumentException;
 use stdClass;
 
 /**
@@ -42,7 +43,7 @@ abstract class AbstractBasePlaceholderTemplate implements TemplateInterface
     use NormalizeStringableCapableTrait;
 
     /* @since [*next-version*] */
-    use CreateCouldNotRenderExceptionCapableTrait;
+    use CreateTemplateRenderExceptionCapableTrait;
 
     /**
      * {@inheritdoc}
@@ -54,7 +55,7 @@ abstract class AbstractBasePlaceholderTemplate implements TemplateInterface
         try {
             return $this->_render($context);
         } catch (RootException $e) {
-            throw $this->_createCouldNotRenderException($this->__('Could not render placeholder template'), null, $e, $this);
+            throw $this->_createTemplateRenderException($this->__('Could not render placeholder template'), null, $e, $this, $context);
         }
     }
 
