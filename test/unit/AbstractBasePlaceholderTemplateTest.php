@@ -3,7 +3,7 @@
 namespace Dhii\Output\UnitTest;
 
 use Dhii\Output\AbstractBasePlaceholderTemplate as TestSubject;
-use Dhii\Output\Exception\CouldNotRenderExceptionInterface;
+use Dhii\Output\Exception\TemplateRenderExceptionInterface;
 use stdClass;
 use Xpmock\TestCase;
 use Exception as RootException;
@@ -150,17 +150,17 @@ class AbstractBasePlaceholderTemplateTest extends TestCase
     }
 
     /**
-     * Creates a new Could Not Render exception.
+     * Creates a new Template Render exception.
      *
      * @since [*next-version*]
      *
      * @param string $message The error message, if any.
      *
-     * @return MockObject|CouldNotRenderExceptionInterface The new exception.
+     * @return MockObject|TemplateRenderExceptionInterface The new exception.
      */
-    public function createCouldNotRenderException($message = '')
+    public function createTemplateRenderException($message = '')
     {
-        $mock = $this->mockClassAndInterfaces('Exception', ['Dhii\Output\Exception\CouldNotRenderExceptionInterface'])
+        $mock = $this->mockClassAndInterfaces('Exception', ['Dhii\Output\Exception\TemplateRenderExceptionInterface'])
             ->setConstructorArgs([$message])
             ->getMock();
 
@@ -281,8 +281,8 @@ class AbstractBasePlaceholderTemplateTest extends TestCase
     {
         $context = uniqid('context');
         $rootException = $this->createException('Something went wrong while rendering');
-        $exception = $this->createCouldNotRenderException('Could not render');
-        $subject = $this->createInstance(['_render', '_createCouldNotRenderException']);
+        $exception = $this->createTemplateRenderException('Could not render');
+        $subject = $this->createInstance(['_render', '_createTemplateRenderException']);
         $_subject = $this->reflect($subject);
 
         $subject->expects($this->exactly(1))
@@ -290,8 +290,14 @@ class AbstractBasePlaceholderTemplateTest extends TestCase
             ->with($context)
             ->will($this->throwException($rootException));
         $subject->expects($this->exactly(1))
-            ->method('_createCouldNotRenderException')
-            ->with()
+            ->method('_createTemplateRenderException')
+            ->with(
+                $this->isType('string'),
+                $this->anything(),
+                $rootException,
+                $subject,
+                $context
+            )
             ->will($this->returnValue($exception));
 
         $this->setExpectedException(static::COULD_NOT_RENDER_EXCEPTION_CLASSNAME);
