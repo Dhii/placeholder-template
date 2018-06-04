@@ -14,9 +14,13 @@ A template implementation that replaces placeholders in text
 - [`PlaceholderTemplate`] - A concrete placeholder template implementation. Allows rendering of a template with
 placeholders, so as to have the placeholders substituted by values from a container.
 - [`AbstractBasePlaceholderTemplate`] - Common functionality for placeholder template implementations.
+- [`PlaceholderTemplateFactory`] - A concrete factory of placeholder templates.
+- [`AbstractBasePlaceholderTemplateFactory`] - Common functionality for placeholder template factories.
 
 
 [Dhii]: https://github.com/Dhii/dhii
 
 [`PlaceholderTemplate`]:                                    src/PlaceholderTemplate.php
 [`AbstractBasePlaceholderTemplate`]:                        src/AbstractBasePlaceholderTemplate.php
+[`PlaceholderTemplateFactory`]:                             src/PlaceholderTemplateFactory.php
+[`AbstractBasePlaceholderTemplateFactory`]:                 src/AbstractBasePlaceholderTemplateFactory.php
