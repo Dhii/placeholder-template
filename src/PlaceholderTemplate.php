@@ -54,7 +54,7 @@ class PlaceholderTemplate extends AbstractBasePlaceholderTemplate
      * @param $tokenEnd
      * @param null $tokenDefault
      */
-    public function __construct($template, $tokenStart, $tokenEnd, $tokenDefault = null)
+    public function __construct($template, $tokenStart, $tokenEnd, $tokenDefault)
     {
         $this->_setPlaceholderTemplate($template);
         $this->_setTokenStart($tokenStart);
