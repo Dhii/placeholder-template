@@ -12,13 +12,23 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": "^5.4 | ^7.0"
+        "php": "^5.4 | ^7.0",
+        "dhii/placeholder-template-abstract": "^0.1-alpha4",
+        "dhii/exception": "^0.1-alpha4",
+        "dhii/i18n-helper-base": "^0.1-alpha1",
+        "dhii/normalization-helper-base": "^0.1-alpha3",
+        "dhii/regex-abstract": "^0.1-alpha1",
+        "dhii/container-helper-base": "^0.1-alpha5",
+        "dhii/stringable-helper-base": "^0.1-alpha2",
+        "dhii/data-container-base": "^0.1-alpha1",
+        "dhii/output-renderer-base": "^0.1-alpha1"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
         "ptrofimov/xpmock": "^1.1",
         "dhii/php-cs-fixer-config": "^0.1",
-        "codeclimate/php-test-reporter": "<=0.3.2"
+        "codeclimate/php-test-reporter": "<=0.3.2",
+        "dhii/output-renderer-interface": "^0.3-alpha2"
     },
     "autoload": {
         "psr-4": {
