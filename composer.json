@@ -21,7 +21,8 @@
         "dhii/container-helper-base": "^0.1-alpha5",
         "dhii/stringable-helper-base": "^0.1-alpha2",
         "dhii/data-container-base": "^0.1-alpha1",
-        "dhii/output-renderer-base": "^0.1-alpha1"
+        "dhii/output-renderer-base": "^0.1-alpha1",
+        "dhii/factory-base": "^0.1-alpha2"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
