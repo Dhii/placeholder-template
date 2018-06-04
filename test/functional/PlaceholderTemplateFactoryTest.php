@@ -2,8 +2,9 @@
 
 namespace Dhii\Output\UnitTest;
 
-use Dhii\Output\PlaceholderTemplate as TestSubject;
+use Dhii\Output\PlaceholderTemplateFactory as TestSubject;
 use Dhii\Output\Exception\CouldNotRenderExceptionInterface;
+use Dhii\Output\TemplateFactoryInterface;
 use Xpmock\TestCase;
 use Exception as RootException;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
@@ -14,14 +15,14 @@ use PHPUnit_Framework_MockObject_MockBuilder as MockBuilder;
  *
  * @since [*next-version*]
  */
-class PlaceholderTemplateTest extends TestCase
+class PlaceholderTemplateFactoryTest extends TestCase
 {
     /**
      * The class name of the test subject.
      *
      * @since [*next-version*]
      */
-    const TEST_SUBJECT_CLASSNAME = 'Dhii\Output\PlaceholderTemplate';
+    const TEST_SUBJECT_CLASSNAME = 'Dhii\Output\PlaceholderTemplateFactory';
 
     /**
      * Class name of Could Not Render exception.
@@ -165,24 +166,24 @@ class PlaceholderTemplateTest extends TestCase
     }
 
     /**
-     * Tests whether `render()` works as expected when given a context.
+     * Tests whether `make()` works as expected.
      *
      * @since [*next-version*]
      */
-    public function testRenderContext()
+    public function testProtectedRenderContext()
     {
-        $template = 'The quick brown ${fox} jumped over the lazy ${dog}; what a ${rascal} that ${adjective} ${fox}!';
+        $template = uniqid('template');
+        $className = 'Dhii\Output\PlaceholderTemplate';
         $tStart = '${';
         $tEnd = '}';
         $default = '***';
-        $context = [
-            'fox' => 'Elizabeth',
-            'dog' => 'Bruno',
+        $config = [
+            TemplateFactoryInterface::K_TEMPLATE => $template,
         ];
-        $subject = $this->createInstance(null, [$template, $tStart, $tEnd, $default]);
+        $subject = $this->createInstance(null, [$className, $tStart, $tEnd, $default]);
         $_subject = $this->reflect($subject);
 
-        $result = $subject->render($context);
-        $this->assertEquals('The quick brown Elizabeth jumped over the lazy Bruno; what a *** that *** Elizabeth!', $result, 'Wrong rendering result');
+        $result = $subject->make($config);
+        $this->assertInstanceOf('Dhii\Output\PlaceholderTemplate', $result, 'Wrong product created');
     }
 }
