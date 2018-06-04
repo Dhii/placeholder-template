@@ -165,11 +165,11 @@ class PlaceholderTemplateTest extends TestCase
     }
 
     /**
-     * Tests whether `_render()` works as expected when given a context.
+     * Tests whether `render()` works as expected when given a context.
      *
      * @since [*next-version*]
      */
-    public function testProtectedRenderContext()
+    public function testRenderContext()
     {
         $template = 'The quick brown ${fox} jumped over the lazy ${dog}; what a ${rascal} that ${adjective} ${fox}!';
         $tStart = '${';
