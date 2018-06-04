@@ -11,6 +11,8 @@ use Dhii\I18n\StringTranslatorConsumingTrait;
 use Dhii\Regex\GetAllMatchesRegexCapablePcreTrait;
 use Dhii\Regex\QuoteRegexCapablePcreTrait;
 use Dhii\Util\String\StringableReplaceCapableTrait;
+use Dhii\Util\String\StringableInterface as Stringable;
+use InvalidArgumentException;
 
 /**
  * A template implementation that replaces placeholders in text.
@@ -47,12 +49,14 @@ class PlaceholderTemplate extends AbstractBasePlaceholderTemplate
     use CreateInvalidArgumentExceptionCapableTrait;
 
     /**
-     * PlaceholderTemplate constructor.
+     * @since [*next-version*]
      *
-     * @param $template
-     * @param $tokenStart
-     * @param $tokenEnd
-     * @param null $tokenDefault
+     * @param Stringable|string|int|float|bool $template     The template which is represented by this instance.
+     * @param Stringable|string|int|float|bool $tokenStart   The delimiter which represents the start of a token.
+     * @param Stringable|string|int|float|bool $tokenEnd     The delimiter which represents the end of a token.
+     * @param Stringable|string|int|float|bool $tokenDefault The default value to use when a token's value cannot be resolved.
+     *
+     * @throws InvalidArgumentException If one of the parameters is of an invalid type.
      */
     public function __construct($template, $tokenStart, $tokenEnd, $tokenDefault)
     {
